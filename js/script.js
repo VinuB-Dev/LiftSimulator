@@ -113,6 +113,10 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("Please enter valid numbers for floors and lifts");
       }
 
+      if (floors === 1 && lifts > 1) {
+        throw new Error("A single-floor building can only have one lift.");
+      }
+
       if (floors < 1 || lifts < 1) {
         throw new Error("Please enter positive numbers");
       }
@@ -178,7 +182,7 @@ const renderFloors = (container) => {
     buttonList.className = "button-list";
     floorDiv.appendChild(buttonList);
 
-    if (i !== state.numberOfFloors) {
+    if (i !== state.numberOfFloors || state.numberOfLifts === 1) {
       const upButton = createAccessibleButton("Up", i - 1, "up");
       buttonList.appendChild(upButton);
     }
